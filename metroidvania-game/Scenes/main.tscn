@@ -1,5 +1,25 @@
-[gd_scene format=3 uid="uid://cucsy8axcpwxj"]
+[gd_scene load_steps=4 format=3 uid="uid://cucsy8axcpwxj"]
+
+[ext_resource type="PackedScene" uid="uid://gmiqsbhtv2hc" path="res://Scenes/player.tscn" id="1_joevj"]
+[ext_resource type="Texture2D" uid="uid://dsjr1k3tueyd5" path="res://icon.svg" id="2_at15j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fuffs"]
+size = Vector2(1148, 127)
 
 [node name="Main" type="Node2D"]
 
-[node name="Test" type="Node" parent="."]
+[node name="Player" parent="." instance=ExtResource("1_joevj")]
+position = Vector2(267, 187)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(550, 580)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(25.5, 0)
+scale = Vector2(8.99219, 1)
+texture = ExtResource("2_at15j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, 0.5)
+shape = SubResource("RectangleShape2D_fuffs")
