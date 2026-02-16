@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=3 uid="uid://gmiqsbhtv2hc"]
+[gd_scene format=3 uid="uid://gmiqsbhtv2hc"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_worb2"]
+[ext_resource type="Script" uid="uid://u4hirrdht7o" path="res://Scripts/player.gd" id="1_worb2"]
 [ext_resource type="Texture2D" uid="uid://dm1jpk7u1ww61" path="res://Assets/Sprites/assets/images/Pink Man/Fall (32x32).png" id="1_ykby6"]
 [ext_resource type="Texture2D" uid="uid://cng7ht2y0jymp" path="res://Assets/Sprites/assets/images/Pink Man/Hit (32x32).png" id="2_qspw0"]
 [ext_resource type="Texture2D" uid="uid://bv4bu7fy5r7dc" path="res://Assets/Sprites/assets/images/Pink Man/Idle (32x32).png" id="3_o8wso"]
@@ -262,17 +262,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1b11"]
 size = Vector2(18, 26)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1577562105]
 scale = Vector2(4, 4)
 script = ExtResource("1_worb2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1561303873]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_bddcq")
-animation = &"Idling"
+animation = &"Jumping"
 autoplay = "Idling"
-frame_progress = 0.814263
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1631571352]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_a1b11")
