@@ -13,6 +13,7 @@ const FALL_GRAVITY := 1500
 #jump variables
 var JUMP_VELOCITY := -650
 var jump_amount := 0
+var is_double_jump = false
 
 #dash variables
 const DASH_SPEED := 1000.0
@@ -39,13 +40,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		animated_sprite_2d.animation = "Idling"
 	
-	if velocity.y < 0:
+	if velocity.y < 0 and !is_double_jump:
 		animated_sprite_2d.animation = "Jumping"
+	elif velocity.y < 0 and is_double_jump and !is_on_wall():
+		animated_sprite_2d.animation = "DoubleJumping"
 	elif velocity.y > 0:
 		animated_sprite_2d.animation = "Falling"
 	
 	if is_on_floor():
 		jump_amount = 0
+		can_dash = true
+		is_double_jump = false
+	
+	elif is_on_wall():
 		can_dash = true
 	
 	# Add the gravity.
@@ -56,6 +63,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	elif is_on_wall() and Input.is_action_pressed("right"):
+		animated_sprite_2d.flip_h = false
+		animated_sprite_2d.animation = "WallJump"
 		velocity.x = -wall_jump_pushback
 		jump_amount = 0
 		if Input.is_action_just_pressed("jump"):
@@ -65,6 +74,8 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY / 4
 			jump_amount += 1
 	elif is_on_wall() and Input.is_action_pressed("left"):
+		animated_sprite_2d.flip_h = true
+		animated_sprite_2d.animation = "WallJump"
 		velocity.x = wall_jump_pushback
 		jump_amount = 0
 		if Input.is_action_just_pressed("jump"):
@@ -77,9 +88,11 @@ func _physics_process(delta: float) -> void:
 	
 	elif !is_on_floor() and !jump_amount == 1 and !is_on_wall():
 			if Input.is_action_just_pressed("jump"):
+				is_double_jump = true
 				velocity.y = JUMP_VELOCITY
 				jump_amount += 1
 			if Input.is_action_just_released("jump") and velocity.y < 0:
+				is_double_jump = true
 				velocity.y = JUMP_VELOCITY / 4
 				jump_amount += 1
 
