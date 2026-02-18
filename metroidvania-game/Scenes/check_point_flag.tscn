@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cx3wv8qg8sp5a"]
+[gd_scene load_steps=15 format=3 uid="uid://bofuy5a36wr11"]
 
+[ext_resource type="Script" path="res://Scripts/check_point_flag.gd" id="1_2faoy"]
 [ext_resource type="Texture2D" uid="uid://2ejfyawp0mtq" path="res://Assets/Sprites/images/Tilemap/Checkpoint (Flag Idle)(64x64).png" id="1_6rwsp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0oeo"]
@@ -84,6 +85,7 @@ animations = [{
 size = Vector2(15, 20)
 
 [node name="CheckPointFlag" type="Node2D"]
+script = ExtResource("1_2faoy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -93,7 +95,14 @@ autoplay = "Wave"
 frame_progress = 0.963474
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-8, 9)
 shape = SubResource("RectangleShape2D_f2e3s")
+
+[node name="TeleportTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_teleport_timer_timeout"]

@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://qg7xkss5gdfm"]
 
 [ext_resource type="Texture2D" uid="uid://dmbcu455y6vgt" path="res://Assets/Sprites/images/Tilemap/Terrain (16x16).png" id="1_lwvg1"]
-[ext_resource type="PackedScene" uid="uid://cx3wv8qg8sp5a" path="res://Scenes/check_point_flag.tscn" id="2_fvn8x"]
-[ext_resource type="PackedScene" uid="uid://gmiqsbhtv2hc" path="res://Scenes/player.tscn" id="3_38v0r"]
+[ext_resource type="PackedScene" uid="uid://bofuy5a36wr11" path="res://Scenes/check_point_flag.tscn" id="2_fvn8x"]
+[ext_resource type="PackedScene" uid="uid://de386lk0nfyw" path="res://Scenes/player.tscn" id="3_38v0r"]
+
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yg5df"]
 texture = ExtResource("1_lwvg1")

@@ -42,8 +42,8 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.y < 0 and !is_double_jump:
 		animated_sprite_2d.animation = "Jumping"
-	elif is_double_jump and !is_on_wall() and !is_on_floor():
-		animated_sprite_2d.play("DoubleJumping")
+	elif velocity.y < 0 and is_double_jump and !is_on_wall():
+		animated_sprite_2d.animation = "DoubleJumping"
 	elif velocity.y > 0:
 		animated_sprite_2d.animation = "Falling"
 	
@@ -62,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	elif is_on_wall() and Input.is_action_pressed("right"):
+	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("right"):
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.animation = "WallJump"
 		velocity.x = -wall_jump_pushback
@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y = JUMP_VELOCITY / 4
 			jump_amount += 1
-	elif is_on_wall() and Input.is_action_pressed("left"):
+	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("left"):
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.animation = "WallJump"
 		velocity.x = wall_jump_pushback
