@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=4 uid="uid://cucsy8axcpwxj"]
 
-[ext_resource type="PackedScene" uid="uid://gmiqsbhtv2hc" path="res://Scenes/player.tscn" id="1_joevj"]
-[ext_resource type="Texture2D" uid="uid://dmbcu455y6vgt" path="res://Assets/Sprites/images/Tilemap/Terrain (16x16).png" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://gmiqsbhtv2hc" path="res://Scenes/Objects/player.tscn" id="1_vndy0"]
+[ext_resource type="Texture2D" uid="uid://dmbcu455y6vgt" path="res://Assets/Sprites/images/Tilemap/Terrain (16x16).png" id="2_6kqsj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mffe1"]
-texture = ExtResource("3_8gbba")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xf6s7"]
+texture = ExtResource("2_6kqsj")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -284,11 +284,11 @@ texture = ExtResource("3_8gbba")
 
 [sub_resource type="TileSet" id="TileSet_kry3j"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_mffe1")
+sources/0 = SubResource("TileSetAtlasSource_xf6s7")
 
 [node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_joevj")]
+[node name="Player" parent="." instance=ExtResource("1_vndy0")]
 position = Vector2(267, 187)
 scale = Vector2(3, 3)
 
