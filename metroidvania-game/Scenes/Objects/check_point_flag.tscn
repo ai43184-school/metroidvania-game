@@ -1,4 +1,8 @@
+<<<<<<< HEAD:metroidvania-game/Scenes/check_point_flag.tscn
 [gd_scene load_steps=15 format=3 uid="uid://cx3wv8qg8sp5a"]
+=======
+[gd_scene load_steps=15 format=3 uid="uid://bofuy5a36wr11"]
+>>>>>>> main:metroidvania-game/Scenes/check_point_flag.tscn
 
 [ext_resource type="Script" path="res://Scripts/check_point_flag.gd" id="1_2faoy"]
 [ext_resource type="Texture2D" uid="uid://2ejfyawp0mtq" path="res://Assets/Sprites/images/Tilemap/Checkpoint (Flag Idle)(64x64).png" id="1_6rwsp"]
