@@ -42,8 +42,8 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.y < 0 and !is_double_jump:
 		animated_sprite_2d.animation = "Jumping"
-	elif velocity.y < 0 and is_double_jump and !is_on_wall():
-		animated_sprite_2d.animation = "DoubleJumping"
+	elif is_double_jump and !is_on_wall() and !is_on_floor():
+		animated_sprite_2d.play("DoubleJumping")
 	elif velocity.y > 0:
 		animated_sprite_2d.animation = "Falling"
 	
