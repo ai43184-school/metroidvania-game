@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://de386lk0nfyw"]
+[gd_scene load_steps=57 format=3 uid="uid://gmiqsbhtv2hc"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_worb2"]
 [ext_resource type="Texture2D" uid="uid://bxdbm80ykj6fw" path="res://Assets/Sprites/images/Pink Man/Jump (32x32).png" id="2_6t5aa"]
