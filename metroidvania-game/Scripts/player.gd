@@ -7,8 +7,8 @@ extends CharacterBody2D
 const SPEED := 450.0
 
 #gravity variables
-const GRAVITY := 1000
-const FALL_GRAVITY := 1500
+const GRAVITY := 1500
+const FALL_GRAVITY := 2000
 
 #jump variables
 var JUMP_VELOCITY := -650

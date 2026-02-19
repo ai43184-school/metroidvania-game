@@ -4,7 +4,6 @@ signal winscreen
 
 @onready var tele_timer: Timer = $TeleportTimer
 
-
 func _on_teleport_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Levels/main.tscn")
 
