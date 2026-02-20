@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://d4cglj3ifio6j"]
+
+[ext_resource type="Texture2D" uid="uid://cfpvyk81s0iy7" path="res://Assets/Sprites/images/Tilemap/Screenshot 2026-02-19 205726.png" id="1_3al7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yepl"]
+size = Vector2(916, 356)
+
+[sub_resource type="Animation" id="Animation_3al7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1yepl"]
+resource_name = "move"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.13333334, 3.5333333, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8500, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tyq8h"]
+_data = {
+&"RESET": SubResource("Animation_3al7h"),
+&"move": SubResource("Animation_1yepl")
+}
+
+[node name="Moving Platform" type="Node2D" unique_id=2146514448]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=203190149]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=713302245]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_1yepl")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=1362361786]
+texture_filter = 1
+position = Vector2(0, 1)
+scale = Vector2(1, 1.08)
+texture = ExtResource("1_3al7h")
+region_rect = Rect2(9, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D" unique_id=2077781256]
+libraries/ = SubResource("AnimationLibrary_tyq8h")
+autoplay = &"move"
