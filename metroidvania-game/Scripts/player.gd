@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var unlock: Node2D = $Unlock
 
 #movement variables
 const SPEED := 450.0
@@ -13,15 +14,18 @@ const FALL_GRAVITY := 2000
 #jump variables
 var JUMP_VELOCITY := -650
 var jump_amount := 0
+var has_unlocked_jump = false
 var is_double_jump = false
 
 #dash variables
 const DASH_SPEED := 1000.0
+var has_unlocked_dash = false
 var dashing = false
 var can_dash = true
 
 #wall jump variables
 const wall_jump_pushback = 100
+var has_unlocked_wall = false
 
 
 func gravity(velocity: Vector2):
@@ -30,6 +34,11 @@ func gravity(velocity: Vector2):
 	return FALL_GRAVITY
 
 func _physics_process(delta: float) -> void:
+	# Updates Abilities
+	has_unlocked_dash = GameManager.unlock_dash
+	has_unlocked_wall = GameManager.unlock_wall
+	has_unlocked_jump = GameManager.unlock_jump
+	
 	# Add animation
 	if velocity.x > 1 or velocity.x < -1:
 		animated_sprite_2d.animation = "Running"
@@ -62,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("right"):
+	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("right") and has_unlocked_wall:
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.animation = "WallJump"
 		velocity.x = -wall_jump_pushback
@@ -73,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("jump") and velocity.y < 0:
 			velocity.y = JUMP_VELOCITY / 4
 			jump_amount += 1
-	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("left"):
+	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("left") and has_unlocked_wall:
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.animation = "WallJump"
 		velocity.x = wall_jump_pushback
@@ -97,7 +106,7 @@ func _physics_process(delta: float) -> void:
 				jump_amount += 1
 
 	#Handles Dashing
-	if Input.is_action_just_pressed("dash") and can_dash:
+	if Input.is_action_just_pressed("dash") and can_dash and has_unlocked_dash:
 		animated_sprite_2d.play("Dashing")
 		can_dash = false
 		dashing = true
