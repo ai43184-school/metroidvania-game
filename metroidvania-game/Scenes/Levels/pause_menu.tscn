@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bhi8o2wft5da8"]
+
+[ext_resource type="Script" uid="uid://uv4wnqrvlfis" path="res://Scripts/pause_menu.gd" id="1_kud7c"]
+[ext_resource type="FontFile" uid="uid://dl37ttp0nntn3" path="res://Assets/fonts/Square-Black.ttf" id="1_yafon"]
+
+[node name="Pause Menu" type="Control" unique_id=721555717]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kud7c")
+
+[node name="Menu" type="Button" parent="." unique_id=1002735379]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 552.0
+offset_right = 1064.0
+offset_bottom = 660.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_yafon")
+theme_override_font_sizes/font_size = 35
+text = "Menu"
+
+[node name="Title" type="Label" parent="." unique_id=985248988]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 66.0
+offset_right = 390.0
+offset_bottom = 166.0
+theme_override_fonts/font = ExtResource("1_yafon")
+theme_override_font_sizes/font_size = 100
+text = "Paused"
+
+[node name="Resume" type="Button" parent="." unique_id=1758155917]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 416.0
+offset_right = 1064.0
+offset_bottom = 524.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_yafon")
+theme_override_font_sizes/font_size = 35
+text = "Resume"
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]

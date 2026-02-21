@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://cuijhx166yuwt"]
+
+[ext_resource type="Script" uid="uid://cranodv4e8108" path="res://Scripts/main_menu.gd" id="1_t475i"]
+[ext_resource type="Texture2D" uid="uid://yjoh1rs53415" path="res://Assets/Sprites/images/Background/Blue.png" id="1_vytfc"]
+[ext_resource type="FontFile" uid="uid://dl37ttp0nntn3" path="res://Assets/fonts/Square-Black.ttf" id="2_t475i"]
+[ext_resource type="Shader" uid="uid://cmhi1mdhrrdxu" path="res://Assets/Shaders/main_menu.gdshader" id="2_xg7my"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmo1h"]
+shader = ExtResource("2_xg7my")
+
+[node name="Main Menu" type="Control" unique_id=721555717]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t475i")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1085905320]
+material = SubResource("ShaderMaterial_wmo1h")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vytfc")
+stretch_mode = 1
+
+[node name="Title" type="Label" parent="." unique_id=985248988]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -352.0
+offset_right = 228.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_t475i")
+theme_override_font_sizes/font_size = 100
+text = "Jump Slime"
+
+[node name="PlayButton" type="Button" parent="." unique_id=567046396]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -54.0
+offset_right = 159.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_t475i")
+theme_override_font_sizes/font_size = 50
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="." unique_id=842594171]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = 128.0
+offset_right = 159.0
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_t475i")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
