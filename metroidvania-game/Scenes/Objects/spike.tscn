@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b14p3skvm6x4q"]
+
+[ext_resource type="Texture2D" uid="uid://b18b8lwro4gig" path="res://Assets/Sprites/images/Tilemap/Sprite.png" id="1_duktt"]
+[ext_resource type="Script" uid="uid://cpu725wwlpkaj" path="res://Scripts/spike.gd" id="1_xxn00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxn00"]
+size = Vector2(16, 8)
+
+[node name="Spike" type="Node2D" unique_id=2073151349]
+script = ExtResource("1_xxn00")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=925410504]
+texture_filter = 1
+texture = ExtResource("1_duktt")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1645740933]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1251451599]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_xxn00")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=322473386]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
