@@ -15,8 +15,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="metroidvania game"
-run/main_scene="uid://cuijhx166yuwt"
-config/features=PackedStringArray("4.6", "Mobile")
+run/main_scene="res://Scenes/Levels/main_menu.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]

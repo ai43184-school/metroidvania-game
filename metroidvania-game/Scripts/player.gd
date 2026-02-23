@@ -47,7 +47,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Add animation
 	if velocity.x > 1 or velocity.x < -1:
-		animated_sprite_2d.animation = "Running"
+		if !dashing:
+			animated_sprite_2d.animation = "Running"
+		elif dashing:
+			animated_sprite_2d.play("Dashing")
 		if velocity.x > 1:
 			animated_sprite_2d.flip_h = true
 		else:
