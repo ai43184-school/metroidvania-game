@@ -4,8 +4,7 @@ extends CharacterBody2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var death_sound: AudioStreamPlayer2D = $DeathSound
 @onready var unlock: Node2D = $Unlock
-
-signal menu
+@onready var dash_cool: Timer = $"Dash Cooldown"
 
 #states
 var player_dead = false
@@ -15,10 +14,10 @@ const SPEED := 450.0
 
 #gravity variables
 const GRAVITY := 1500
-const FALL_GRAVITY := 2000
+const FALL_GRAVITY := 1500
 
 #jump variables
-var JUMP_VELOCITY := -650
+var JUMP_VELOCITY := -900
 var jump_amount := 0
 var has_unlocked_jump = false
 var is_double_jump = false
@@ -30,7 +29,7 @@ var dashing = false
 var can_dash = true
 
 #wall jump variables
-const wall_jump_pushback = 100
+const WALL_JUMP_PUSHBACK = 100
 var has_unlocked_wall = false
 
 
@@ -65,11 +64,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
 		jump_amount = 0
-		can_dash = true
 		is_double_jump = false
-		$RegularHitbox.disabled = false
-		$RWallJumpHitbox.disabled = true
-		$LWallJumpHitbox.disabled = true
 	
 	elif is_on_wall():
 		can_dash = true
@@ -83,12 +78,9 @@ func _physics_process(delta: float) -> void:
 		jump_sound.play()
 		velocity.y = JUMP_VELOCITY
 	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("right") and has_unlocked_wall:
-		$RegularHitbox.disabled = true
-		$RWallJumpHitbox.disabled = false
-		$LWallJumpHitbox.disabled = true
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.animation = "WallJump"
-		velocity.x = -wall_jump_pushback
+		velocity.x = -WALL_JUMP_PUSHBACK
 		jump_amount = 0
 		if Input.is_action_just_pressed("jump"):
 			jump_sound.play()
@@ -99,12 +91,9 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY / 4
 			jump_amount += 1
 	elif !is_on_floor() and is_on_wall() and Input.is_action_pressed("left") and has_unlocked_wall:
-		$RegularHitbox.disabled = true
-		$RWallJumpHitbox.disabled = true
-		$LWallJumpHitbox.disabled = false
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.animation = "WallJump"
-		velocity.x = wall_jump_pushback
+		velocity.x = WALL_JUMP_PUSHBACK
 		jump_amount = 0
 		if Input.is_action_just_pressed("jump"):
 			jump_sound.play()
@@ -130,10 +119,11 @@ func _physics_process(delta: float) -> void:
 
 	#Handles Dashing
 	if Input.is_action_just_pressed("dash") and can_dash and has_unlocked_dash:
-		animated_sprite_2d.play("Dashing")
+		animated_sprite_2d.animation = "Dashing" 
 		can_dash = false
 		dashing = true
 		$"Dash Timer".start()
+		dash_cool.start()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -154,9 +144,13 @@ func _physics_process(delta: float) -> void:
 		set_physics_process(true)
 	
 	if Input.is_action_just_pressed("menu"):
-		menu.emit()
+		GameManager.menu_open = true
 	
 	move_and_slide()
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true

@@ -255,13 +255,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1b11"]
-size = Vector2(18, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_picsy"]
-size = Vector2(15, 25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfgsd"]
-size = Vector2(14, 25)
+size = Vector2(56, 80)
 
 [node name="Player" type="CharacterBody2D" unique_id=64123622 groups=["Player"]]
 collision_mask = 5
@@ -269,35 +263,30 @@ script = ExtResource("1_worb2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2081387282]
 texture_filter = 1
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bddcq")
-animation = &"Hit"
+animation = &"WallJump"
 autoplay = "Idling"
-frame = 6
-frame_progress = 1.0
 
 [node name="RegularHitbox" type="CollisionShape2D" parent="." unique_id=1287936173]
-position = Vector2(0, 8)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_a1b11")
-
-[node name="RWallJumpHitbox" type="CollisionShape2D" parent="." unique_id=888224784]
-position = Vector2(8.5, 1.5)
-shape = SubResource("RectangleShape2D_picsy")
-disabled = true
-
-[node name="LWallJumpHitbox" type="CollisionShape2D" parent="." unique_id=1951435887]
-position = Vector2(-6, 1.5)
-shape = SubResource("RectangleShape2D_dfgsd")
-disabled = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=313144742]
 stream = ExtResource("2_cvnsp")
-volume_db = 24.0
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=2025986796]
 stream = ExtResource("4_dfgsd")
-volume_db = 24.0
+
+[node name="PlayerCam" type="Camera2D" parent="." unique_id=744315550]
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="Dash Timer" type="Timer" parent="." unique_id=1605377073]
 wait_time = 0.2
 
+[node name="Dash Cooldown" type="Timer" parent="." unique_id=1326224716]
+wait_time = 0.4
+
 [connection signal="timeout" from="Dash Timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Dash Cooldown" to="." method="_on_dash_cooldown_timeout"]
